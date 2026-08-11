@@ -1,0 +1,47 @@
+I2C Simulation
+
+Simulation Steps
+
+Using Icarus Verilog
+
+Compile the RTL and testbench:
+
+iverilog -o i2c_sim rtl/i2c_master.v testbench/i2c_master_tb.v
+
+Run the simulation:
+
+vvp i2c_sim
+
+A waveform file named "i2c.vcd" will be generated.
+
+View Waveform
+
+Use GTKWave:
+
+gtkwave i2c.vcd
+
+Signals to Observe
+
+- "clk"
+- "rst"
+- "start"
+- "scl"
+- "sda"
+- "busy"
+- "done"
+- "slave_addr"
+- "data_in"
+
+Expected Waveform
+
+The waveform should show:
+
+START → SLAVE ADDRESS → ACK → DATA → ACK → STOP
+
+For this testbench:
+
+- Slave Address = "50H"
+- Data = "A5H"
+- I²C communication starts when "start = 1"
+- "busy" becomes HIGH during communication
+- "done" becomes HIGH after transmission is completed
